@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <title>Collaborate with us | Let's Celebrate</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/homepage.css' %}" />
+  <link href='https://fonts.googleapis.com/css?family=Allura' rel='stylesheet'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-md bg-danger navbar-dark p-0">
+    <a class="navbar-brand pb-0 pt-0 pl-3" style="font-family: Allura;  font-size: 32px;">Let's Celebrate</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar2">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar2">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item p-2">
+          <a class="nav-link" href="/">Home</a>
+        </li> 
+        </ul>
+        </div>
+        </nav>
+<br>
+<div class="container">
+  {% if messages %}
+    {% for message in messages %}
+      {% if message.tags %}
+        <div class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{message}}
+          </div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  {% if mess %}
+    {% for m in mess %}
+        <div class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{m}}
+          </div>
+    {% endfor %}
+  {% endif %}
+
+<br><br>
+<p style="text-align: center;font-weight: 700;">New user?&emsp;&emsp;<button class="btn btn-danger" onclick="myFunction1()">Sign Up</button></p>
+<p style="text-align: center;font-weight: 700;">Registered user?&emsp;&emsp;<button class="btn btn-danger" onclick="myFunction2()">Login</button></p>
+</div>
+<div style="display: none;" class="container" id="myDIV1">
+  <div class="row justify-content-sm-center">
+    <div class="col-sm-6 bg-light p-3">
+      <br>
+      <form action="" method="POST">
+        {% csrf_token %}
+        {{hm1.as_p}}
+        <div class="text-center">
+          <input name="hsign" type="submit" class="btn btn-danger" value="Submit">
+          {% if hm1.errors %}
+                <script>
+                document.getElementById("myDIV1").style.display="block"
+                </script>
+          {% endif %}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div style="display: none;" class="container" id="myDIV2">
+  <div class="row justify-content-sm-center">
+    <div class="col-sm-6 bg-light p-3">
+      <br>
+      <form action="" method="POST">
+        {% csrf_token %}
+        {{hm2.as_p}}
+        <div class="text-center">
+          <input  name="hlogin" type="submit" class="btn btn-danger" value="Submit">
+          {% if hm2.errors %}
+                <script>
+                  document.getElementById("myDIV2").style.display="block"
+                </script>
+                  <p class="errorm">Invalid username or password</p>
+                {% endif %}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+  function myFunction1() {
+    var x = document.getElementById("myDIV1");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+    var y = document.getElementById("myDIV2");
+    if (y.style.display === "block") {
+      y.style.display = "none";
+    } 
+  }
+
+  function myFunction2() {
+    var x = document.getElementById("myDIV2");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+    var y = document.getElementById("myDIV1");
+    if (y.style.display === "block") {
+      y.style.display = "none";
+    } 
+  }
+</script>
+<br><br><br>
+    <div class="container">
+        <h4 style="color: red; text-align: center;">Terms and Conditions</h4><br>
+        <div class="p-2">
+          <h6>It is necessary for Home made bakers to fill the registration form and provide FSSAI certificate. The Food Safety and Standards Authority of India (FSSAI) is a legal authority that offers a food license to all food business operators (FBO) in India. All the FBOs must follow all the rules and regulations of FSSAI for food quality control. After that we will verify your details and let you know.</h6>
+          <hr class="style2">
+          <h6>Once the payment is received by our website then we will take 5% commission on each and every order. Customer have two options to pay. If customer chooses online payment then our website will take 5% of money and remaining money will be given to home made bakers. And another option if the customer chooses to pay on delivery then our website will get directly 5% commission.</h6>
+          <hr class="style2">
+          <h6>Once the order is received in our website we will notify to home made bakers. As our website is using area pincode system so it is very easy to notify home made bakers those are near to our customer, through this we will provide in minimum time delivery. </h6>
+          <hr class="style2">
+          <h6>As compared to others online cake shop our website will take &#8377;500 as a maintainence charges anually.</h6>
+        </div>
+</body>
+</html>

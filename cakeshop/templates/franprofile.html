@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <title>Franchise Profile | Let's Celebrate</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/homepage.css' %}" />
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-danger navbar-dark p-0">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar2">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar2">
+          <ul class="navbar-nav">
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/franprofile">Your items</a>
+            </li>
+            <li class="nav-item active p-2">
+              <a class="nav-link" href="/franprofile/franadd">Add item</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="{% url 'franlogout' %}">logout</a>
+            </li>   
+          </ul>
+        </div>  
+    </nav>
+    <div style="margin-top:10vw;" class="container">
+    <div class="row justify-content-sm-center">
+    <div class="col-sm-6 bg-light p-5">
+        <form action="" method="POST" enctype="multipart/form-data"> 
+                {% csrf_token %}
+                <p>
+                    {{fp1.name.label_tag}} {{fp1.name}}
+        
+                </p>
+                <p>
+                    {{fp1.category.label_tag}}{{fp1.category}}
+                </p>
+                <p>
+                    {{fp1.cimg.label_tag}} {{fp1.cimg}}
+                </p>
+                <p>
+                    <p>Available cake weight:</p> 
+                    <input type="checkbox" style="width:20px;height:20px;" id="myCheck500" onclick="myFunction500()">
+                    <label for="myCheck500">500 gms</label>&emsp;&emsp; 
+                    <input type="checkbox" style="width:20px;height:20px;" id="myCheck1" onclick="myFunction1()">
+                    <label for="myCheck1">1 kg</label>&emsp;&emsp;
+                    <input type="checkbox" style="width:20px;height:20px;" id="myCheck2" onclick="myFunction2()">
+                    <label for="myCheck2">2 kg</label>&emsp;&emsp;
+                    <input type="checkbox" style="width:20px;height:20px;" id="myCheck3" onclick="myFunction3()">
+                    <label for="myCheck3">3 kg</label>&emsp;&emsp;
+                    <p id="lab500" style="display:none">
+                        {{fp1.price500.label_tag}} {{fp1.price500}}
+                    </p>
+                    <p id="lab1" style="display:none">
+                        {{fp1.price1.label_tag}} {{fp1.price1}}
+                    </p>
+                    <p id="lab2" style="display:none">
+                        {{fp1.price2.label_tag}} {{fp1.price2}}
+                    </p>
+                    <p id="lab3" style="display:none">
+                        {{fp1.price3.label_tag}} {{fp1.price3}}
+                    </p>
+                </p>
+                <p>
+                    {{fp1.des.label_tag}} {{fp1.des}}
+                </p> 
+                
+
+                <script>
+                function myFunction500() {
+                var checkBox = document.getElementById("myCheck500");
+                var text = document.getElementById("lab500");
+                if (checkBox.checked == true){
+                    text.style.display = "block";
+                } else {
+                    text.style.display = "none";
+                }
+                }
+                </script>
+                <script>
+                    function myFunction1() {
+                    var checkBox = document.getElementById("myCheck1");
+                    var text = document.getElementById("lab1");
+                    if (checkBox.checked == true){
+                        text.style.display = "block";
+                    } else {
+                        text.style.display = "none";
+                    }
+                    }
+                    </script>
+                    <script>
+                    function myFunction2() {
+                    var checkBox = document.getElementById("myCheck2");
+                    var text = document.getElementById("lab2");
+                    if (checkBox.checked == true){
+                        text.style.display = "block";
+                    } else {
+                        text.style.display = "none";
+                    }
+                    }
+                    </script>
+                    <script>
+                        function myFunction3() {
+                        var checkBox = document.getElementById("myCheck3");
+                        var text = document.getElementById("lab3");
+                        if (checkBox.checked == true){
+                            text.style.display = "block";
+                        } else {
+                            text.style.display = "none";
+                        }
+                        }
+                    </script>
+            <input type="submit" class="btn btn-danger" id="sub" value="Add Item">
+            
+        </form>
+    </div>
+    </div>
+    </div>
+
+</body>
+</html>

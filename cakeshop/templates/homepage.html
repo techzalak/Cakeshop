@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <title>Let's Celebrate</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/homepage.css' %}" />
+  <link href='https://fonts.googleapis.com/css?family=Allura' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md bg-light navbar-light ">
+  <i class="material-icons" style="font-size:36px; margin-bottom: 18px;">cake</i><h3 class="navbar-brand pb-0 pt-0" style="font-family: Allura; font-weight: 700; font-size: 32px;"> Let's Celebrate</h3>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown ">
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          Collaborate with us
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="/franchise">Franchise</a>
+          <a class="dropdown-item" href="/homebaker">Homemade bakers</a>
+        </div>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link navfont" href="/contactus">Help</a>
+      </li>    
+    </ul>
+  </div>  
+</nav>
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+  <!-- Indicators -->
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+  
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'images/cake2.jpg' %}" alt="Los Angeles" width="100%" height="50%">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/cake1.jpg' %}" alt="Chicago" width="100%" height="20%">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/cake4.jpg' %}" alt="New York" width="1100" height="300">
+    </div>
+  </div>
+  
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+<nav class="navbar navbar-expand-md bg-danger navbar-dark p-0">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar2">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar2">
+    <ul class="navbar-nav">
+      <li class="nav-item p-2">
+        <a class="nav-link" href="/birthdays">Birthdays</a>
+      </li>
+      <li class="nav-item p-2">
+        <a class="nav-link" href="/anniversary">Anniversary</a>
+      </li>
+      <li class="nav-item p-2">
+        <a class="nav-link" href="/graduation">Graduation</a>
+      </li>
+      <li class="nav-item p-2">
+        <a class="nav-link" href="/kids">Kids</a>
+      </li>
+      <li class="nav-item p-2">
+        <a class="nav-link" href="/pastries">Pastries</a>
+      </li>      
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      {% if request.user.is_authenticated %}
+      <li class="nav-item active p-2">
+        <a class="nav-link" href="#">Welcome {{request.user}}</a>
+      </li>
+      <li class="nav-item p-2">
+        <a class="nav-link" href="/cart">Cart</a>
+      </li>
+      <li class="nav-item p-2">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+      </li>
+      {% else %}
+      <li class="nav-item p-2">
+        <a class="nav-link" href="/custlogin">Login</a>
+      </li>
+      {% endif %}
+      <li class="nav-item p-2">
+        <a class="nav-link" href="#footer">About us</a>
+      </li>
+      
+    </ul>
+
+  </div>  
+</nav>
+<div class="container-fluid p-3">
+  <div class="row">
+    <a href="/homemade">
+    <div class="col-sm-6 m-0 hm">
+      <img src="{% static 'images/cake6.jpg' %}" alt="Los Angeles" width="100%"  class="img-fluid">
+      <div class="overlay">
+        <div class="text">Home made cakes</div>
+      </div>
+    </a>
+    </div>
+    <div class="col-sm-6 m-0 bd">
+      <img src="{% static 'images/cake12.jpg' %}" alt="Los Angeles" width="100%"  class="img-fluid">
+      <div class="overlay2">
+        <div class="text2">
+          <br><br> <br>
+          Branded cakes
+          <br>
+          {% if fran %}
+            {% for i in fran %}
+              <a href="{% url i.brand %}"><button class="btn1 btn-danger">{{i.brand}}</button></a>
+            {% endfor %}
+          {% endif %}
+          {% if ntfran %}
+            {% for n in ntfran%}
+              <button class="btn1 btn-danger" disabled>{{n.brand}}</button>
+            {% endfor %}
+          {% endif %}
+          <!--
+          <button type="button" class="btn1 btn-danger" id="ribbal">Ribbons and Balloons</button>
+          <button type="button" class="btn1 btn-danger" id="7th" >7th Heaven</button>
+          <button type="button" class="btn1 btn-danger" id="basrob">Baskin-Robbins</button>
+          <button type="button" class="btn1 btn-danger" id="legat" >Le Gateau</button>
+          -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
+<div class="container-fluid bg-danger foot">
+  <br>
+  <h3>About Us</h3>
+  <div class="row">
+    <div class="p-4" id="footer">
+      <h4>This is one of the best platform for homemade bakers to reach out to large extent of customers. </h4>
+      <br>
+      <h4>What makes us special?</h4>
+      <p>We provide both homemade and shop baked cakes to our customers across all over the country be it any city. Our team ensures timely delivery, with best quality and fresh products.</p>
+      <br>
+      <h4>What we do?</h4>
+      <p>We provide trustworthy and convenient platform to choose from birthdays, anniversaries, graduation, for kids and many more occassions.</p>
+      <div class="row">
+        <div class="col-sm-6">
+          <ul>
+            <li class="nav-item p-2">
+              <a class="nav-link al" href="/contactus">Contact us</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link al" href="/faq">FAQs</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-6">
+          <ul>
+            <li class="nav-item p-2">
+              <a class="nav-link al" href="/yearlysub">Yearly Subscription</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link al" href="" data-toggle="modal" data-target="#collaborate">Collaborate with us</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="collaborate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Collaborate with us</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6> Franchise Tie-ups</h6>
+        <p>For getting associated with us, please fill the form <a href="/franchise">Franchise registration form</a></p>
+        <h6> Homemade Bakers</h6>
+        <p>For getting associated with us, please fill the form <a href="/homebaker">Homemade bakers registration form</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal 2-->
+
+</body>
+</html>
+

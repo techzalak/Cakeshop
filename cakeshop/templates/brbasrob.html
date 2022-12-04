@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <title>Baskin-Robbins | Let's Celebrate</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/homepage.css' %}" />
+  <link href='https://fonts.googleapis.com/css?family=Allura' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-md bg-danger navbar-dark p-0">
+    <i class="material-icons" style="font-size:36px; margin-bottom: 12px; color: white; padding-left: 22px;">cake</i><a class="navbar-brand pb-0 pt-0" style="font-family: Allura;  font-size: 32px;">Let's Celebrate</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar2">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar2">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item p-2">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+      </ul>
+    </div>  
+</nav>
+<div class="container-fluid my-5">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="list-group mb-3">
+        <a href="/brands/brbasrob" class="list-group-item list-group-item-action border border-dark" aria-current="true">All Baskins-Robins</a>
+        <a href="{% url 'b_basrobdata' 'birth' %}"  class="list-group-item list-group-item-action border border-dark" aria-current="true">Birthdays</a>
+        <a href="{% url 'b_basrobdata' 'anni' %}"  class="list-group-item list-group-item-action border border-dark" aria-current="true">Anniversary</a>
+        <a href="{% url 'b_basrobdata' 'grad' %}"  class="list-group-item list-group-item-action border border-dark" aria-current="true">Graduation</a>
+        <a href="{% url 'b_basrobdata' 'kid' %}"  class="list-group-item list-group-item-action border border-dark" aria-current="true">Kids</a>
+        <a href="{% url 'b_basrobdata' 'pastry' %}"  class="list-group-item list-group-item-action border border-dark" aria-current="true">Pastries</a>
+      <div>
+    </div> 
+  </div>
+</div>
+<div class="col-sm-8">
+    {% if fitem %}
+        <div  class="row justify-content-md-center">
+        {% for i in fitem %}
+            <div class ="col-sm-4 mb-3">
+              <div class="card">
+                <img class="card-img-top" src="{{i.cimg.url}}" alt="Card image">
+                <div class="card-body">
+                  <h4 class="card-title">{{i.name}}</h4>
+                  <div class="row">
+                    <div class="col-sm-6 mb-3">
+                    
+                        {% if i.price500 != None %}
+                            <h6>&#8377;{{i.price500}} (500 gms)</h6>
+                        {% elif i.price1 != None %}
+                            <h6>&#8377;{{i.price1}} (1 kg)</h6>
+                        {% elif i.price2 != None %}
+                            <h6>&#8377;{{i.price2}} (2 kgs)</h6>
+                        {% else %}
+                            <h6>&#8377;{{i.price3}} (3 kgs)</h6>
+                        {% endif %}
+                    </div>
+                    </div>
+                    
+                  <p class="card-text" style="color: black;">{{i.des}}</p>
+                  <a href="{% url 'mondetail' i.id %}"><button type="button" class="btn btn-danger" >See More</button></a>
+                </div>
+              </div>
+            </div>
+        {% endfor %}
+        </div>
+    {% else %}
+        <h4 class= "text-center alert alert-danger">No Available Cakes</h4>
+    {% endif %}
+    </div>
+</body>
+</html>

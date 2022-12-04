@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <title>Cart | Let's Celebrate</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/homepage.css' %}" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-md bg-danger navbar-dark p-0">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar2">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar2">
+      <ul class="navbar-nav">
+        <li class="nav-item  p-2">
+          <a class="nav-link" href="/birthdays">Birthdays</a>
+        </li>
+        <li class="nav-item p-2">
+          <a class="nav-link" href="/anniversary">Anniversary</a>
+        </li>
+        <li class="nav-item p-2">
+          <a class="nav-link" href="/graduation">Graduation</a>
+        </li>
+        <li class="nav-item p-2">
+          <a class="nav-link" href="/kids">Kids</a>
+        </li>
+        <li class="nav-item p-2">
+          <a class="nav-link" href="/pastries">Pastries</a>
+        </li>      
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        {% if request.user.is_authenticated %}
+        <li class="nav-item active p-2">
+          <a class="nav-link" href="#">Welcome {{request.user}}</a>
+        </li>
+        <li class="nav-item p-2 active">
+          <a class="nav-link" href="/cart">Cart</a>
+        </li>
+        <li class="nav-item p-2">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item p-2">
+          <a class="nav-link" href="/custlogin">Login</a>
+        </li>
+        {% endif %}
+        <li class="nav-item p-2">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        
+      </ul>
+  
+    </div>  
+  </nav>
+  <br>
+<div class="container">
+  <div class="row">
+  {% if carts %}
+    <div class="col-md-8">
+      {% for cart in carts %}
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 text-center">
+              <img src="{{cart.cid.cimg.url}}" class="img-fluid" height="300" width="300">
+            </div>
+            <div class="col-md-6">
+              <h4>{{cart.cid.name}}</h4>
+              <p>{{cart.cid.des}}</p>
+              <hr>
+              {% if cart.kg == 500 %}
+                <h5>Price: &#8377;{{cart.cid.price500}}</h5>
+                <h6>Weight: {{cart.kg}}gms</h6>
+              {% elif cart.kg == 1 %}
+                <h5>Price: &#8377;{{cart.cid.price1}}</h5>
+                <h6>Weight: {{cart.kg}}kg</h6>
+              {% elif cart.kg == 2 %}
+                <h5>Price: &#8377;{{cart.cid.price2}}</h5>
+                <h6>Weight: {{cart.kg}}kg</h6>
+              {% elif cart.kg == 3 %}
+                <h5>Price: &#8377;{{cart.cid.price3}}</h5>
+                <h6>Weight: {{cart.kg}}kg</h6>
+              {% endif %}
+              <br>
+              <div>
+                <label for="quantity">Quantity:</label>
+                <a class="btn btn-danger btn-sm font-weight-bold minus" pid="{{cart.cid.id}}">-</a>
+                &emsp;<span id="quantity">{{cart.quan}}</span>&emsp;
+                <a class="btn btn-danger btn-sm font-weight-bold plus" pid="{{cart.cid.id}}">+</a>
+                <br><br>
+                <div class="text-right">
+                    <a class="btn btn-danger remove" pid="{{cart.cid.id}}">Remove</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+              <h5>Amount: <span id="amtid">{{amt}}</span></h5> 
+              <h5>Delivery Charges: 60</h5>
+            
+              {% if discount != 0 %}
+                <h5>Discount: <span id="dis">{{discount}} </span></h5>
+                <p>You have Yearly Subscription</p>
+              {% endif %}
+              <hr>
+              <h4>Total Amount: <span id="totamtid">{{totamt}}</span></h4>
+          <a class="btn btn-danger" href="/payment">Place Order</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  {% else %}
+<div class="container">
+  <div class="alert alert-danger text-center">
+    Cart is empty
+  </div>
+</div>
+{% endif %} 
+<script>
+$('.plus').click(function(){
+  var id = $(this).attr("pid").toString();
+  var eml = this.parentNode.children[2]
+  console.log(id)
+  $.ajax({
+    type:"GET",
+    url:"/cart/pluscart",
+    data:{
+      cid : id
+    },
+    success: function (data){
+      console.log(data)
+      eml.innerText = data.quan
+      document.getElementById("amtid").innerText = data.amt
+      document.getElementById("totamtid").innerText = data.totamt
+      document.getElementById("dis").innerText =data.discount
+    }
+  })
+})
+$('.minus').click(function(){
+  var id = $(this).attr("pid").toString();
+  var eml = this.parentNode.children[2]
+  console.log(id)
+  $.ajax({
+    type:"GET",
+    url:"/cart/minuscart",
+    data:{
+      cid : id
+    },
+    success: function (data){
+      console.log(data)
+      eml.innerText = data.quan
+      document.getElementById("amtid").innerText = data.amt
+      document.getElementById("totamtid").innerText = data.totamt
+      document.getElementById("dis").innerText =data.discount
+    }
+  })
+})
+$('.remove').click(function(){
+  var id = $(this).attr("pid").toString();
+  var eml = this
+  console.log(id)
+  $.ajax({
+    type:"GET",
+    url:"/cart/removeitem",
+    data:{
+      cid : id
+    },
+    success: function (data){
+      console.log(data)
+      document.getElementById("amtid").innerText = data.amt
+      document.getElementById("totamtid").innerText = data.totamt
+      document.getElementById("dis").innerText =data.discount
+      eml.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.remove()
+    }
+  })
+})
+
+</script>
+</body>
+</html>

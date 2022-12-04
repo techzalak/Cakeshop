@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <title>FAQ | Let's Celebrate</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/homepage.css' %}" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-danger navbar-dark p-0">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar2">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar2">
+          <ul class="navbar-nav">
+            <li class="nav-item  p-2">
+              <a class="nav-link" href="/birthdays">Birthdays</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/anniversary">Anniversary</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/graduation">Graduation</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/kids">Kids</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/pastries">Pastries</a>
+            </li>      
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+          </ul>
+        </div>  
+      </nav>
+      <div class="container">
+        <div class="row justify-content-md-center dec">
+          <div class="col-md-3 cd bg-danger">
+            <div class="card-body text-center">
+              <br><a href="#" class="linkbox" data-toggle="modal" data-target="#cancellation">
+              <h6 class="card-text text-center" style="font-size: 30px;">Cancellation and refund policy</h6>
+              </a>
+              <p class="card-text cf">T&C*</p>
+            </div>
+          </div>
+        
+          <div class="modal fade bd-example-modal-lg" id="cancellation" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" style="font-size:28px" id="exampleModalLongTitle">Cancellation and refund policy</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" >
+                  <ul type="circle">
+                  <li  style="font-size:20px">We request cancellation request before 3 hours of the delivery</li><br>
+                  <li  style="font-size:20px">If the cancellation request is valid - 10% of the order value is charged as cancellation charges and 90% refund will be credited to the bank account.</li>
+                  <br> <li  style="font-size:20px">Only one attempt for delivery will be made. Please confirm availability of recipient before choosing a delivery time. If the recipient is not available at the time of delivery, the second attempt will not be made and order will be canceled. No refund will be made in such case.</li>
+                </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 cd bg-light">
+            <div class="card-body">
+              <br><a href="#" class="linkbox" data-toggle="modal" data-target="#special">
+
+              <div class="card-text text-center cs p-2" style=" font-size:35px; border: dashed black;">Yearly Subscription</div>
+              </a>
+            </div>
+          </div>
+          <div class="modal fade bd-example-modal-lg" id="special" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" style="font-size:28px" id="exampleModalLongTitle">Collaborate with us</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h6> Yearly Subscription</h6>
+
+                  <p>Are you a cake lover? Get a yearly subscription on our website by paying just 500 rupees. By filling the form <a href="/yearlysub">here</a> and paying 500 rupees, you will get our exclusive yearly subscription and get 5% discount on every branded and home-made cake you order througout the year. Enjoy delicious and variety of cakes at discounted price, and make your every occasion memorial with us.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 cd bg-danger">
+            <div class="card-body text-center"><br>
+              <br><a href="#" class="linkbox" data-toggle="modal" data-target="#collaborate">
+
+              <h4 class="card-text text-center  p-2" style="font-size:30px;">Collaborate with us</h4>
+              </a>
+              <p class="card-text cf">T&C*</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade bd-example-modal-lg" id="collaborate" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" style="font-size:28px" id="exampleModalLongTitle">Collaborate with us</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <ul type="circle">
+                <h6> Franchise Tie-ups</h6>
+                <li style="font-size:20px">For getting associated with us, please fill the form <a href="/franchise">Franchise registration form</a></li>
+                <h6> Homemade Bakers</h6>
+                <li style="font-size:20px">For getting associated with us, please fill the form <a href="/homebaker">Homemade bakers registration form</a></li>
+              </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-md-center">
+          <div class="col-md-3 cd bg-danger">
+            <div class="card-body text-center"><br><br>
+              <br><a href="#" class="linkbox" data-toggle="modal" data-target="#inquiries">
+
+              <h4 class="card-text text-center  p-2" style="font-size:30px;">Inquiries about charges</h4>
+              </a>
+              <p class="card-text cs"></p>
+            </div>
+          </div>
+          <div class="modal fade bd-example-modal-lg" id="inquiries" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" style="font-size:28px" id="exampleModalLongTitle">Inquiries about charges</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <ul type="circle">
+                    <h6 style="font-size:20px"> 1. Are there any delivery charges?</h6>
+                    <li style="font-size:20px">Delivery charges varies from location to location. When you provide pin code of the delivery address, our website will show you the delivery charges for that particular location. Delivery charges ranges between Rs. 0 – 300 rupees.</li>
+                   <br> <h6 style="font-size:20px"> 2. Are there any hidden charges (GST) when I make a purchase?</h6>
+                    <li style="font-size:20px">There are NO hidden charges when you make a purchase on our website. The prices listed for all the items are final and all-inclusive. The price you see is exactly what you need to pay. Delivery charges may be extra depending on the location and other parameters.</li>
+                   <br> <h6 style="font-size:20px"> 3. Does this website provides midnight delivery as well? Is there any extra charge for it?</h6>
+                    <li style="font-size:20px">Yes, we do provide midnight delivery. The midnight delivery time is from 11:00 PM to 11:59 PM. Although we try our best to deliver order as close to 23:59 as possible, it is always suggested to have midnight orders placed well on time. We charge Rs. 250 extra for midnight delivery.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 cd bg-light">
+            <div class="card-body text-center"><br>
+              <br><a href="#" class="linkbox" data-toggle="modal" data-target="#delivery">
+
+              <div class="card-text text-center cs p-2" style=" font-size:35px; border: dashed black;">Expected delivery date</div>
+</a>
+              <p class="card-text cs"></p>
+            </div>
+          </div>
+        </div>  
+        <div class="modal fade bd-example-modal-lg" id="delivery" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" style="font-size:28px" id="exampleModalLongTitle">Expected delivery date</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <ul type="circle">
+                  <li style="font-size:20px">Delivery of the product will be done within the time given</li>
+                 <br> 
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="card1" style="margin-top: 1000px;">Hello</div>
+
+</body>
+</html>

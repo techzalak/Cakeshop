@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <title>Collaborate with us | Let's Celebrate</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/homepage.css' %}" />
+  <!--<script src="https://js.stripe.com/v3/"></script>-->
+  <link href='https://fonts.googleapis.com/css?family=Allura' rel='stylesheet'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+  <nav class="navbar navbar-expand-md bg-danger navbar-dark p-0">
+    <a class="navbar-brand pb-0 pt-0 pl-3" style="font-family: Allura;  font-size: 32px;">Let's Celebrate</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar2">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar2">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item p-2">
+          <a class="nav-link" href="/">Home</a>
+        </li> 
+        </ul>
+        </div>
+        </nav>
+<br><br>
+<div class="container">
+  {% if messages %}
+    {% for message in messages %}
+      {% if message.tags %}
+        <div class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+              {{message}}
+          </div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+<p style="text-align: center;font-weight: 700;">New user?&emsp;&emsp;&emsp;&emsp;<button class="btn btn-danger" onclick="myFunction1()">Sign Up</button></p>
+<p style="text-align: center;font-weight: 700;">Registered user?&emsp;&emsp;<button class="btn btn-danger" onclick="myFunction2()">Log in</button></p>
+</div>
+<!--Code for visibility and invisibility of div -->
+
+<!--Sign up div-->
+<div style="display:none;" class="container" id="myDIV1">
+  <div class="row justify-content-md-center">
+    <div class="col-sm-6 bg-light p-3">
+      <br>
+      <form action="" method="POST" id="payment-form">
+        {% csrf_token %}
+        {{fm1.as_p}}
+        <!--<div class="form-row">
+            <div id="card-element">
+               A Stripe Element will be inserted here
+            </div>
+
+             Used to display form errors.
+            <div id="card-errors" role="alert"></div>
+            
+          </div>
+            <div id="card-errors" role="alert"></div>
+
+          
+            <div style="clear:left"></div>
+            <hr>-->
+              <div class="text-center">
+          <input name="signup" type="submit" class="btn btn-danger" value="Submit">
+          {% if fm1.errors %}
+                <script>
+                document.getElementById("myDIV1").style.display="block"
+                </script>
+          {% endif %}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--Log in div-->
+<div style="display:none;" class="container" id="myDIV2">
+    <div class="row justify-content-md-center">
+        <div class="col-sm-6 bg-light p-3">
+          <br>
+          <form action="" method="POST">
+            {% csrf_token %}
+            {{fm2.as_p}}
+            <div class="text-center">
+              <input name="login" type="submit" class="btn btn-danger" value="Submit">
+              {% if fm2.errors %}
+                <script>
+                document.getElementById("myDIV2").style.display="block"
+                </script>
+              {% endif %}
+            </div>
+          </form>
+        </div>
+      </div>
+</div>
+
+<br>
+<br>
+<br>
+    <div class="container">
+        <h4 style="color: red; text-align: center;">Terms and Conditions</h4><br>
+        <div class="p-2">
+          <h6>On total monthly orders recevied 10% of it should be paid to the website. If the customer chooses online payment then 10% of it will be deducted and remaining amount will be transfered to your account and if customer chooses cash on delivery option then 10% of it should be deposited to the website account.</h6>
+          <hr class="style2">
+          <h6>Delivery of the product will not be provided by the website your franchise will have to appoint a delivery person to deliver the product on time.</h6>
+          <hr class="style2">
+          <h6>This website costs very less maintainence charge Franchise will have to pay yearly only Rs1000 as maintainence charges.</h6>
+          <hr class="style2">
+          <h6>Cake provided by the franchise should be fresh and of good quality.</h6>
+          <hr class="style2">
+        </div>
+      </div>
+      <script>
+        var stripe = Stripe('pk_test_51Is58uSEtOES0fnRhEw5dDMC6zDhYUmvyjcAC32742YC8anKEubxcxWsHFei0CJFAwKFtWhfMToZ11KaKZ4S2deR00abl6FlZv');
+    
+        // Create an instance of Elements.
+        var elements = stripe.elements();
+    
+        // Custom styling can be passed to options when creating an Element.
+        // (Note that this demo uses a wider set of styles than the guide below.)
+        var style = {
+          base: {
+            color: '#32325d',
+            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+            fontSmoothing: 'antialiased',
+            fontSize: '16px',
+            '::placeholder': {
+              color: '#aab7c4'
+            }
+          },
+          invalid: {
+            color: '#fa755a',
+            iconColor: '#fa755a'
+          }
+        };
+    
+        // Create an instance of the card Element.
+        var card = elements.create('card', {style: style});
+    
+        // Add an instance of the card Element into the `card-element` <div>.
+        card.mount('#card-element');
+    
+        // Handle real-time validation errors from the card Element.
+        card.addEventListener('change', function(event) {
+          var displayError = document.getElementById('card-errors');
+          if (event.error) {
+            displayError.textContent = event.error.message;
+          } else {
+            displayError.textContent = '';
+          }
+        });
+    
+        // Handle form submission.
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function(event) {
+          event.preventDefault();
+    
+          stripe.createToken(card).then(function(result) {
+            if (result.error) {
+              // Inform the user if there was an error.
+              var errorElement = document.getElementById('card-errors');
+              errorElement.textContent = result.error.message;
+            } else {
+              // Send the token to your server.
+              stripeTokenHandler(result.token);
+            }
+          });
+        });
+    
+        // Submit the form with the token ID.
+        function stripeTokenHandler(token) {
+          // Insert the token ID into the form so it gets submitted to the server
+          var form = document.getElementById('payment-form');
+          var hiddenInput = document.createElement('input');
+          hiddenInput.setAttribute('type', 'hidden');
+          hiddenInput.setAttribute('name', 'stripeToken');
+          hiddenInput.setAttribute('value', token.id);
+          form.appendChild(hiddenInput);
+    
+          // Submit the form
+          form.submit();
+        }
+    
+        function myFunction1() {
+      var x = document.getElementById("myDIV1");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+      var y = document.getElementById("myDIV2");
+      if (y.style.display === "block") {
+        y.style.display = "none";
+      } 
+    }
+    function myFunction2() {
+      var x = document.getElementById("myDIV2");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+      var y = document.getElementById("myDIV1");
+      if (y.style.display === "block") {
+        y.style.display = "none";
+      } 
+    }
+
+    </script>
+    
+</body>
+</html>

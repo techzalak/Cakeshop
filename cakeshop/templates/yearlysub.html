@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <title>Yearly Subscription | Let's Celebrate</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/homepage.css' %}" />
+  <script src="https://js.stripe.com/v3/"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  
+</head>
+<body>
+    <br>
+    <br>
+    <div class="container">
+        <div class="p-2">
+            <h4 id="card3">How to get Yearly Subscription?</h4>
+<h6>Are you a cake lover? Get a yearly subscription on our website by paying just 500 rupees. By filling the form and paying 500 rupees, you will get our exclusive yearly subscription and get 5% discount on every branded and home-made cake you order througout the year. Enjoy delicious and variety of cakes at discounted price, and make your every occasion memorial with us.</h6>
+            <hr class="style2">
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row justify-content-sm-center">
+            <div class="col-sm-6">
+        <h2>Subscription form</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nam">Name:</label>
+                <input type="name" class="form-control" id="nam" placeholder="Enter Name" name="name">
+            </div>
+            <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+          </div>
+            <div class="form-group">
+            <label for="usernam">Username:</label>
+            <input type="username" class="form-control" id="usernam" placeholder="Enter Username" name="usernam">
+          </div>
+          <h5>Amount:&#8377; 500 </h5>
+          <br>
+          <div class="form-row">
+            <label for="card-element">
+              Credit or debit card
+            </label>
+            <div id="card-element">
+              <!-- A Stripe Element will be inserted here. -->
+            </div>
+    
+            <!-- Used to display form errors. -->
+            <div id="card-errors" role="alert"></div>
+         </div>
+    
+         <div id="card-errors" role="alert"></div>
+    
+          {% if messages %}
+            {% for message in messages %}
+                {% if message.tags %}
+                    <div class="alert alert-error alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{message}}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {% endif %}
+            <br>
+            <div class="text-center">
+            <button type="submit" class="btn btn-success">Confirm Payment</button>
+            </div>
+        </form>
+        </div>
+        </div>
+      </div>
+<script>
+     var stripe = Stripe('pk_test_51Is58uSEtOES0fnRhEw5dDMC6zDhYUmvyjcAC32742YC8anKEubxcxWsHFei0CJFAwKFtWhfMToZ11KaKZ4S2deR00abl6FlZv');
+
+// Create an instance of Elements.
+var elements = stripe.elements();
+
+// Custom styling can be passed to options when creating an Element.
+// (Note that this demo uses a wider set of styles than the guide below.)
+var style = {
+  base: {
+    color: '#32325d',
+    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+    fontSmoothing: 'antialiased',
+    fontSize: '16px',
+    '::placeholder': {
+      color: '#aab7c4'
+    }
+  },
+  invalid: {
+    color: '#fa755a',
+    iconColor: '#fa755a'
+  }
+};
+
+// Create an instance of the card Element.
+var card = elements.create('card', {style: style});
+
+// Add an instance of the card Element into the `card-element` <div>.
+card.mount('#card-element');
+
+// Handle real-time validation errors from the card Element.
+card.addEventListener('change', function(event) {
+  var displayError = document.getElementById('card-errors');
+  if (event.error) {
+    displayError.textContent = event.error.message;
+  } else {
+    displayError.textContent = '';
+  }
+});
+
+// Handle form submission.
+var form = document.getElementById('payment-form');
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  stripe.createToken(card).then(function(result) {
+    if (result.error) {
+      // Inform the user if there was an error.
+      var errorElement = document.getElementById('card-errors');
+      errorElement.textContent = result.error.message;
+    } else {
+      // Send the token to your server.
+      stripeTokenHandler(result.token);
+    }
+  });
+});
+
+// Submit the form with the token ID.
+function stripeTokenHandler(token) {
+  // Insert the token ID into the form so it gets submitted to the server
+  var form = document.getElementById('payment-form');
+  var hiddenInput = document.createElement('input');
+  hiddenInput.setAttribute('type', 'hidden');
+  hiddenInput.setAttribute('name', 'stripeToken');
+  hiddenInput.setAttribute('value', token.id);
+  form.appendChild(hiddenInput);
+
+  // Submit the form
+  form.submit();
+}
+</script>
+</body>
+</html>

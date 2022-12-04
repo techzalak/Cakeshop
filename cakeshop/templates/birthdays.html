@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <title>Birthdays | Let's Celebrate</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/homepage.css' %}" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-danger navbar-dark p-0">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar2">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar2">
+          <ul class="navbar-nav">
+            <li class="nav-item active p-2">
+              <a class="nav-link" href="/birthdays">Birthdays</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/anniversary">Anniversary</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/graduation">Graduation</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/kids">Kids</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/pastries">Pastries</a>
+            </li>      
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            {% if request.user.is_authenticated %}
+            <li class="nav-item active p-2">
+              <a class="nav-link" href="#">Welcome {{request.user}}</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/cart">Cart</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/custlogin">Login</a>
+            </li>
+            {% endif %}
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            
+          </ul>
+        </div>  
+    </nav>
+
+    <div class="container-fluid my-5">
+      <div class="row justify-content-sm-center">
+        <div class="col-sm-3">
+          <div class="list-group mb-3">
+            <a href="/birthdays" class="list-group-item list-group-item-action border border-dark" aria-current="true">All Birthday Cakes</a>
+            <a href="{%url 'birthcakesdata' '300-500' %}" class="list-group-item list-group-item-action border border-dark" aria-current="true" >Range 300-500</a>
+            <a href="{%url 'birthcakesdata' '500-700' %}"  class="list-group-item list-group-item-action border border-dark" aria-current="true">Range 500-700</a>
+            <a href="{%url 'birthcakesdata' '700-900' %}"  class="list-group-item list-group-item-action border border-dark" aria-current="true">Range 700-900</a>
+            
+          </div>
+
+          <div class="list-group mb-3">
+            <a href="{%url 'birthcakesdata' 'Monginis' %}"  class="list-group-item list-group-item-action border border-dark" aria-current="true">Monginis</a>
+            <a href="{%url 'birthcakesdata' 'RibbonsandBallons' %}"  class="list-group-item list-group-item-action border border-dark" aria-current="true">Ribbons and Balloons</a>
+            <a href="{%url 'birthcakesdata' 'Merwans' %}"  class="list-group-item list-group-item-action border border-dark" aria-current="true">Merwan's</a>
+            <a href="{%url 'birthcakesdata' '7thHeaven' %}"  class="list-group-item list-group-item-action border border-dark" aria-current="true">7th Heaven</a>
+            <a href="{%url 'birthcakesdata' 'BaskinRobins' %}"  class="list-group-item list-group-item-action border border-dark" aria-current="true">Baskin-Robins</a>
+            <a href="{%url 'birthcakesdata' 'LeGateau' %}"  class="list-group-item list-group-item-action border border-dark" aria-current="true">Le Gateau</a>
+          </div>
+          </div>
+    <div class="col-sm-8">
+      {% if bcakes %}
+      <div  class="row">
+        {% for bcake in bcakes %}
+        <div class ="col-sm-4 mb-3">
+          <div class="card">
+            <img class="card-img-top" src="{{bcake.cimg.url}}" alt="Card image">
+            <div class="card-body">
+              <h4 class="card-title">{{bcake.name}}</h4>
+              {% if bcake.price500 == None %}
+                <h6>&#8377;{{bcake.price1}} (1kg)</h6>
+              {% else %}
+                <h6>&#8377;{{bcake.price500}} (500gms)</h6>
+              {% endif %}
+              <p class="card-text" style="color: black;">{{bcake.des}}</p>
+              <a href="{% url 'birthdaydetail' bcake.id %}"><button type="button" class="btn btn-danger" >See More</button></a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+          <h4 class= "text-center alert alert-danger">No Available Cakes</h4>
+        {% endif  %}
+      </div>  
+    </div>
+
+<!--Modal 1-->
+
+<div class="modal fade bd-example-modal-lg" id="cakedetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Cake Lava</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+              <img class="img-fluid" src="{% static 'images/birthday1.jpg' %}" alt="Card image" height="300px" width="300px">
+            </div>
+            <div class="col-md-6">
+              <p id="price">Price 449</p>
+              <form>
+                <div class="radio">
+                  <label><input type="radio" name="optradio" id="radio1" checked>500 gms</label>
+                </div>
+                <div class="radio">
+                  <label><input type="radio" name="optradio" id="radio2" >1 kg</label>
+                </div>
+                <div class="radio">
+                  <label><input type="radio" name="optradio" id="radio3">2 kg</label>
+                </div>
+              </form>
+              <script>
+                let result = document.querySelector('#price');
+                document.body.addEventListener('change', function (e) {
+                    let target = e.target;
+                    let message;
+                    switch (target.id) {
+                        case 'radio1':
+                            message = 'Price:449';
+                            break;
+                        case 'radio2':
+                            message = 'Price:650';
+                            break;
+                        case 'radio3':
+                            message = 'Price:1200';
+                            break;
+                    }
+                    result.textContent = message;
+                });
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

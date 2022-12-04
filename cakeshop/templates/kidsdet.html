@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <title>Kids | Let's Celebrate</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/homepage.css' %}" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-danger navbar-dark p-0">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar2">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar2">
+          <ul class="navbar-nav">
+            <li class="nav-item  p-2">
+              <a class="nav-link" href="/birthdays">Birthdays</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/anniversary">Anniversary</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/graduation">Graduation</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/kids">Kids</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/pastries">Pastries</a>
+            </li>      
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            {% if request.user.is_authenticated %}
+            <li class="nav-item active p-2">
+              <a class="nav-link" href="#">Welcome {{request.user}}</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/cart">Cart</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/custlogin">Login</a>
+            </li>
+            {% endif %}
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            
+          </ul>
+        </div>  
+    </nav>
+    <br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-7 mb-2">
+                <img src="{{bprod.cimg.url}}" alt="bimg" class="img-fluid">
+            </div>
+            <div class="col-sm-5">
+            <div class="card">
+                <div class="card-body bg-light">
+                <h2>{{bprod.name}}</h2>
+                <hr>
+                <h6>{{bprod.des}}</h6>
+                {% if bprod.price500 != None %}
+                <input type="text" id="price" style="display: inline; border:none; font-weight: 600; font-size: 24px;" value="Price: {{bprod.price500}}" class="bg-light text-dark form-control" readonly>
+                {% elif bprod.price1 != None %}
+                <input type="text" id="price" style="display: inline; border:none; font-weight: 600; font-size: 24px;" value="Price: {{bprod.price1}}" class="bg-light text-dark form-control" readonly>
+                {% elif bprod.price2 != None %}
+                <input type="text" id="price" style="display: inline; border:none; font-weight: 600; font-size: 24px;" value="Price: {{bprod.price2}}" class="bg-light text-dark form-control" readonly>
+                {% elif bprod.price3 != None %}
+                <input type="text" id="price" style="display: inline; border:none; font-weight: 600; font-size: 24px;" value="Price: {{bprod.price3}}" class="bg-light text-dark form-control" readonly>
+                {% endif %}
+                <br><br>
+                <!--
+                    {% if bprod.price500 != None %}
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio1" checked>500 gms</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio2">1 kg</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio3">2 kg</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio4">3 kg</label>
+                        </div>
+                    {% elif bprod.price1 != None %}
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio1" disabled>500 gms</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio2" checked>1 kg</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio3">2 kg</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio4">3 kg</label>
+                        </div>
+                    {% elif bprod.price2 != None %}
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio1" disabled>500 gms</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio2" disabled>1 kg</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio3" checked>2 kg</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio4" >3 kg</label>
+                        </div>
+                    {% elif bprod.price3 == None %}
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio1" disabled>500 gms</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio2" disabled>1 kg</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio3" checked>2 kg</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio4" disabled>3 kg</label>
+                        </div>
+                    {% else %}
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio1" disabled>500 gms</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio2" disabled>1 kg</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio3" disabled>2 kg</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio4" checked>3 kg</label>
+                        </div>
+                    {% endif %} -->
+                    
+                    {% if bprod.price500 == None %}
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio1" disabled>500 gms</label>
+                        </div>
+                    {% else %}
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio1" checked>500 gms</label>
+                        </div>
+                    {% endif %}
+                    {% if bprod.price1 == None %}
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio2" disabled>1 kgs</label>
+                        </div>
+                    {% elif bprod.price500 == None and bprod.price1 != None  %}
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio2" checked>1 kgs</label>
+                        </div>
+                    {% else %}
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio2" >1 kgs</label>
+                        </div>
+                        
+                    {% endif %}
+                    {% if bprod.price2 == None %}
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio3" disabled>2 kgs</label>
+                        </div>
+                    {% elif bprod.price500 == None and bprod.price1 == None and bprod.price2 != None %}
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio3" checked>2 kgs</label>
+                        </div>
+                    {% else %}
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio3" >2 kgs</label>
+                        </div>
+                    {% endif %}
+                    {% if bprod.price3 == None %}
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio4" disabled>3 kgs</label>
+                        </div>
+                    {% elif bprod.price500 == None and bprod.price1 == None and bprod.price2 == None and bprod.price3 != None %}
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio4" checked>3 kgs</label>
+                        </div>
+                    {% else %}
+                        <div class="radio">
+                            <label><input type="radio" name="optradio" id="radio4" >3 kgs</label>
+                        </div>
+                    {% endif %}
+                  <script>
+                    let result = document.querySelector('#price');
+                    document.body.addEventListener('change', function (e) {
+                        let target = e.target;
+                        let message,kg, kg2;
+                        switch (target.id) {
+                            case 'radio1':
+                                message = 'Price: {{bprod.price500}}';
+                                kg='500';
+                                kg2='500';
+                                break;
+                            case 'radio2':
+                                message = 'Price: {{bprod.price1}}';
+                                kg='1';
+                                kg2='1';
+                                break;
+                            case 'radio3':
+                                message = 'Price: {{bprod.price2}}';
+                                kg='2';
+                                kg2='2';
+                                break;
+                            case 'radio4':
+                                message = 'Price: {{bprod.price3}}';
+                                kg='3';
+                                kg2='3';
+                                break;
+                        }
+                        result.value = message;
+                        document.getElementById('kg').value = kg
+                        document.getElementById('kg2').value = kg2
+                    });
+                     
+                </script>
+                <br>
+                {% if request.user.is_authenticated %}
+                <form action="/cart/addcart" class="d-inline">
+                  <input type="hidden" value="{{bprod.id}}" name="prod_id" id="prod_id">
+                    {% if bprod.price500 != None %}
+                        <input type="hidden" value="500" name="kg" id="kg"> 
+                    {% elif bprod.price500 == None and bprod.price1 != None %}
+                        <input type="hidden" value="1" name="kg" id="kg"> 
+                    {% elif bprod.price500 == None and bprod.price1 == None and bprod.price2 != None %}
+                        <input type="hidden" value="2" name="kg" id="kg"> 
+                    {% elif bprod.price500 == None and bprod.price1 == None and bprod.price2 == None and bprod.price3 != None %}
+                        <input type="hidden" value="3" name="kg" id="kg"> 
+                    {% endif %}
+                    <button class="btn btn-danger" type="submit" style="display: inline;">Add to cart</button>
+                </form>
+                <form action="/payment/paymentin" class="d-inline">
+                    <input type="hidden" value="{{bprod.id}}" name="prod_id" id="prod_id">
+                    {% if bprod.price500 != None %}
+                        <input type="hidden" value="500" name="kg" id="kg2"> 
+                    {% elif bprod.price500 == None and bprod.price1 != None %}
+                        <input type="hidden" value="1" name="kg" id="kg2"> 
+                    {% elif bprod.price500 == None and bprod.price1 == None and bprod.price2 != None %}
+                        <input type="hidden" value="2" name="kg" id="kg2"> 
+                    {% elif bprod.price500 == None and bprod.price1 == None and bprod.price2 == None and bprod.price3 != None %}
+                        <input type="hidden" value="3" name="kg" id="kg2"> 
+                    {% endif %}
+                    <input class="btn btn-danger" type="submit" value="Order Now" style="display: inline;">
+                </form>
+                {% else %}
+                <div class="alert alert-danger">
+                    <strong>You need to login to order cakes</strong>
+                </div>
+                {% endif %}
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

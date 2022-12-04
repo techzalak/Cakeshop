@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <title>Discounts|Cake Shop</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/homepage.css' %}" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md bg-danger navbar-dark p-0">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar2">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar2">
+          <ul class="navbar-nav">
+            <li class="nav-item active p-2">
+              <a class="nav-link" href="/birthdays">Birthdays</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/anniversary">Anniversary</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/graduation">Graduation</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/kids">Kids</a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="/pastries">Pastries</a>
+            </li>      
+          </ul>
+      
+        </div>  
+      </nav>
+      <div class="container">
+        <div class="row justify-content-md-center dec">
+          <div class="col-md-3 cd bg-danger">
+            <a class="linkbox" href="#card1"><div class="card-body text-center">
+              <h4 class="card-text font-weight-bold">Upto 25% off</h4>
+              <br>
+              <h6 class="card-text text-center" style="font-size: 25px;">Graduation cakes</h6>
+              <p class="card-text cf">T&C*</p>
+            </div></a>
+          </div>
+          <div class="col-md-3 cd bg-light">
+            <a class="linkbox" href="#card2"><div class="card-body">
+              <div class="card-text text-center cs p-2" style=" font-size:25px; border: dashed black;">C100</div>
+              <br><p class="card-text cs">**Discount upto ₹500
+              Available on orders above ₹700</p>
+            </div></a>
+          </div>
+          <div class="col-md-3 cd bg-danger">
+            <a class="linkbox" href="#card3"><div class="card-body text-center">
+              <h4 class="card-text font-weight-bold p-2">Yearly subscription</h4><br>
+              <p class="card-text">Avail discount upto ₹1000</p>
+              <p class="card-text cf">T&C*</p>
+            </div></a>
+          </div>
+        </div>
+        <div class="row justify-content-md-center">
+          <div class="col-md-3 cd bg-light">
+            <a class="linkbox" href="#card4"><div class="card-body text-center">
+              <p class="card-text cs font-weight-bold" style="font-size: 25px;">Offer on order of 3 cakes/PM</p>
+            </div></a>
+          </div>
+          <div class="col-md-3 cd bg-danger">
+            <a class="linkbox" href="#card5"><div class="card-body text-center">
+              <p class="card-text cs font-weight-bold" style="font-size: 25px;">Exclusive offer for newly weds*</p>
+            </div></a>
+          </div>
+          <div class="col-md-3 cd bg-light">
+            <a class="linkbox" href="#card6"><div class="card-body text-center">
+              <p class="card-text cs font-weight-bold" style="font-size: 25px;">Attractive offers on every festival**</p>
+            </div></a>
+          </div>
+        </div>  
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <div class="container">
+        <div class="p-2">
+          <h4>What can you buy using Coupon Codes?</h4>
+          <h6>Foremost, using the discount coupons you can buy the best product at the discounted price. You can buy cakes items which are available at Online Cake Shop. In the above we mention our coupons cards. Whatever cake you want to buy, you can use coupon code for the same and grab the discounts. Our online cake shop also provides heavy discounts on occasions like Valentine’s Day, Mother’s Day, Raksha Bandhan and many more. Our discount offer encourages users to purchase more cakes and home-made cakes for their near and dear ones. Offering rich-quality products is the most prioritizing ambition in our site. So, spread love and experience the happiness of shopping.</h6>
+          <hr class="style2"></div>
+          <div class="p-2">
+          <h4 id="card1">How to get discount upto 25% on Graduation?</h4>
+          <h6>This is a right time to celebrate our achievements with our near and dear ones. Our site provide a mega offer for graduation students. By clicking, on below link you see a form in which you have to submit your graduation certificate. After clicking on submit you see all branded and home-made cakes in which you will getting the offer upto 25%. Enjoy it and spread love. </h6>
+          <hr class="style2"></div>
+          <div class="p-2">
+          <h4 id="card2">How to Apply Coupon Code?</h4>
+          <h6>Want to surprise your loved ones with something alluring they desire for? Here to deliver all your love-messages to your beloved ones on their special occasions. Customers will be happy to know now we offer some great discounts and coupon codes for all cakes and home-made cakes your people will love. It will be a really nice experience of shopping you must try. However, most people get confused while applying the given coupon code in order. Here, we accept google pay, phonepe, paytm. So, hurry up use a coupon code to get incredible offers.</h6>
+          <hr class="style2"></div>
+          <div class="p-2">
+          <h4 id="card3">How to get Yearly Subscription?</h4>
+          <h6>Are you a cake lover? Get a yearly subscription on our website by paying just only 500 rupees. By clicking below link of yearly subscription you have to pay 500 rupees yearly and get 5% discount on every branded and home-made cake througout the year. Your choice of cake delievered to you. Enjoy it!!</h6>
+          <hr class="style2"></div>
+          <div class="p-2">
+          <h4 id="card4">Get one cake free by ordering 3 cakes per month!!</h4>
+          <h6>If you order three cakes of 1kg through the month then you get one cake of 1kg free from our website. Definitely Customers will be happy to know such offers. So, hurry up for occasions and enjoy it.</h6>
+          <hr class="style2"></div>
+          <div class="p-2">
+          <h4 id="card5">Is their any offers for newly weds?</h4>
+          <h6>Yes, you are in correct website. We provide offers for newly wed's. By giving your correct marraige certification and ordering cake upto 2kg and getting free cake upto 1kg. Enjoy it and give us feedback.  </h6>
+          <hr class="style2"></div>
+          <div class="p-2">
+          <h4 id="card6">How to get attractive offers on every festival?</h4>
+          <h6>There are many attractive offers through the years. Attractive offers depends on special occassions. Like in Diwali we provide mega discount upto 50%, in New year upto 40%, in Chritmas upto 25%,etc. So ready for new festival's, enjoy the moment and spread the love to our near and dear ones!!</h6>
+          <hr class="style2"></div>
+        
+      </div>
+
+</body>
+</html>
