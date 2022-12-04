@@ -24,7 +24,7 @@ MEDIA_URL = '/media/'
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '+mu=dw7$adm#6q1%wa-6u%n&_3(s5a&qi8=l0$e!1hgm+w%^op'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -135,5 +135,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR,]
 
-STRIPE_SECRET_KEY = 'sk_test_51Is58uSEtOES0fnRubY4u4KckqlvVTLBkqRq0jooaR8scO6Gl3lAIs4w5sbrf9J7L41L4jBguOYhJQP5zI4HUN4m00tqhOyyYD'
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51Is58uSEtOES0fnRhEw5dDMC6zDhYUmvyjcAC32742YC8anKEubxcxWsHFei0CJFAwKFtWhfMToZ11KaKZ4S2deR00abl6FlZv'
+
